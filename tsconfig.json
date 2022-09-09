@@ -11,6 +11,14 @@
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
+    "paths": {
+      "dashboard": [
+        "dist/dashboard"
+      ],
+      "navigation": [
+        "dist/navigation"
+      ]
+    },
     "sourceMap": true,
     "declaration": false,
     "downlevelIteration": true,
