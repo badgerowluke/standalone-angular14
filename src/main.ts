@@ -6,8 +6,14 @@ import { bootstrapApplication } from '@angular/platform-browser';
 import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
 
+import { StoreModule } from '@ngrx/store'
+import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
+import { AuthModule } from '@auth0/auth0-angular'
 import { environment } from './environments/environment';
+
+
 
 if (environment.production) {
   enableProdMode();
@@ -17,6 +23,18 @@ if (environment.production) {
 bootstrapApplication(AppComponent, {
   providers: [
     HttpClientModule,
-    importProvidersFrom(RouterModule.forRoot(routes))
+    importProvidersFrom(
+      AuthModule.forRoot({
+        domain: 'brgs.auth0.com',
+        clientId: ''
+      }),
+      RouterModule.forRoot(routes),
+      StoreModule.forRoot({
+          router: routerReducer
+      }),
+      StoreRouterConnectingModule.forRoot(),
+      StoreDevtoolsModule.instrument()
+    ),
+    
   ]
 })

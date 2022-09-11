@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { Map } from 'leaflet';
 import { RouterModule } from '@angular/router';
+import { NavigationHeaderComponent } from 'navigation'
 
 @Component({
-  imports: [ RouterModule ],
+  imports: [ RouterModule, NavigationHeaderComponent ],
   selector: 'app-root',
   standalone: true,
   templateUrl: './app.component.html',
