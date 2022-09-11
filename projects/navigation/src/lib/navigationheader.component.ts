@@ -3,11 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'nav-header',
   standalone: true,
-  template: `
-    <p>
-      navigation works!
-    </p>
-  `,
+  templateUrl: './navigationheader.component.html',
   styles: []
 })
 export class NavigationHeaderComponent implements OnInit {
