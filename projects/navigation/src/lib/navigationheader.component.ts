@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'lib-navigation',
+  selector: 'nav-header',
+  standalone: true,
   template: `
     <p>
       navigation works!
     </p>
   `,
-  styles: [
-  ]
+  styles: []
 })
-export class NavigationComponent implements OnInit {
+export class NavigationHeaderComponent implements OnInit {
 
   constructor() { }
 
