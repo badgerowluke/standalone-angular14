@@ -10,12 +10,14 @@ import { StoreModule } from '@ngrx/store'
 import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
-import { AuthModule } from '@auth0/auth0-angular'
+import { ApplicationInsights } from '@microsoft/applicationinsights-web';
+
+import { AuthModule,AuthClientConfig } from '@auth0/auth0-angular'
 import { environment } from './environments/environment';
 
 fetch('assets/config/config.json')
 .then((response) => response.json())
-.then(config => {
+.then(_config => {
   if (environment.production) {
     enableProdMode();
   }
@@ -24,16 +26,25 @@ fetch('assets/config/config.json')
       {
         provide: APP_INITIALIZER,
         multi: true,
-        deps:[],
-        useValue () {
-          console.log("INIT")
+        deps:[ AuthClientConfig ],
+        useFactory: (authConfig: AuthClientConfig) => {
+          authConfig.set(_config.auth)
+          const insights = new ApplicationInsights({
+            config:{
+              instrumentationKey: _config.insights.instrumentationKey,
+              enableAutoRouteTracking: environment.production 
+            }
+          })
+          insights.loadAppInsights();
+          insights.trackPageView();
+          return() => {}
         }
       },
       HttpClientModule,
       importProvidersFrom(
         AuthModule.forRoot({
-          domain: config.auth.domain,
-          clientId: config.auth.clientId
+          domain: _config.auth.domain,
+          clientId: _config.auth.clientId
         }),
         RouterModule.forRoot(routes),
         StoreModule.forRoot({
@@ -42,7 +53,6 @@ fetch('assets/config/config.json')
         StoreRouterConnectingModule.forRoot(),
         StoreDevtoolsModule.instrument()
       )
-      
     ]
   })
 })

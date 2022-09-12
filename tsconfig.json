@@ -12,6 +12,9 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "paths": {
+      "control-flow": [
+        "dist/control-flow"
+      ],
       "dashboard": [
         "dist/dashboard"
       ],

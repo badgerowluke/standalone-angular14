@@ -165,6 +165,37 @@
           }
         }
       }
+    },
+    "control-flow": {
+      "projectType": "library",
+      "root": "projects/control-flow",
+      "sourceRoot": "projects/control-flow/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/control-flow/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/control-flow/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/control-flow/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/control-flow/src/test.ts",
+            "tsConfig": "projects/control-flow/tsconfig.spec.json",
+            "karmaConfig": "projects/control-flow/karma.conf.js"
+          }
+        }
+      }
     }
   },
   "cli": {

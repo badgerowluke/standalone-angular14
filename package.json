@@ -24,6 +24,7 @@
     "@angular/router": "^14.1.0",
     "@asymmetrik/ngx-leaflet": "^14.0.1",
     "@auth0/auth0-angular": "^1.10.1",
+    "@microsoft/applicationinsights-web": "^2.8.7",
     "@ngrx/effects": "^14.3.1",
     "@ngrx/router-store": "^14.3.1",
     "@ngrx/store": "^14.3.1",
