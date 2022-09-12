@@ -15,13 +15,13 @@ import { environment } from './environments/environment';
 
 
 
-if (environment.production) {
-  enableProdMode();
-}
 
 fetch('assets/config/config.json')
 .then((response) => response.json())
 .then(config => {
+  if (environment.production) {
+    enableProdMode();
+  }
   bootstrapApplication(AppComponent, {
     providers: [
 
