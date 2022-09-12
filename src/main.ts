@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, createEnvironmentInjector, enableProdMode, ENVIRONMENT_INITIALIZER, importProvidersFrom } from '@angular/core';
+import { APP_INITIALIZER, enableProdMode, importProvidersFrom } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { bootstrapApplication } from '@angular/platform-browser';
@@ -13,9 +13,6 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AuthModule } from '@auth0/auth0-angular'
 import { environment } from './environments/environment';
 
-
-
-
 fetch('assets/config/config.json')
 .then((response) => response.json())
 .then(config => {
@@ -24,7 +21,14 @@ fetch('assets/config/config.json')
   }
   bootstrapApplication(AppComponent, {
     providers: [
-
+      {
+        provide: APP_INITIALIZER,
+        multi: true,
+        deps:[],
+        useValue () {
+          console.log("INIT")
+        }
+      },
       HttpClientModule,
       importProvidersFrom(
         AuthModule.forRoot({
@@ -41,6 +45,4 @@ fetch('assets/config/config.json')
       
     ]
   })
-
-
 })
