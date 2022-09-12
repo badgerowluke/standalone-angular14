@@ -1,4 +1,4 @@
-import { enableProdMode, importProvidersFrom } from '@angular/core';
+import { APP_INITIALIZER, createEnvironmentInjector, enableProdMode, ENVIRONMENT_INITIALIZER, importProvidersFrom } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { bootstrapApplication } from '@angular/platform-browser';
@@ -19,22 +19,28 @@ if (environment.production) {
   enableProdMode();
 }
 
+fetch('assets/config/config.json')
+.then((response) => response.json())
+.then(config => {
+  bootstrapApplication(AppComponent, {
+    providers: [
 
-bootstrapApplication(AppComponent, {
-  providers: [
-    HttpClientModule,
-    importProvidersFrom(
-      AuthModule.forRoot({
-        domain: 'brgs.auth0.com',
-        clientId: ''
-      }),
-      RouterModule.forRoot(routes),
-      StoreModule.forRoot({
+      HttpClientModule,
+      importProvidersFrom(
+        AuthModule.forRoot({
+          domain: config.auth.domain,
+          clientId: config.auth.clientId
+        }),
+        RouterModule.forRoot(routes),
+        StoreModule.forRoot({
           router: routerReducer
-      }),
-      StoreRouterConnectingModule.forRoot(),
-      StoreDevtoolsModule.instrument()
-    ),
-    
-  ]
+        }),
+        StoreRouterConnectingModule.forRoot(),
+        StoreDevtoolsModule.instrument()
+      )
+      
+    ]
+  })
+
+
 })
