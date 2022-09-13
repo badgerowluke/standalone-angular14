@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build-components": "ng build navigation && ng build dashboard",
+    "build-components": "ng build navigation && ng build control-flow && ng build dashboard",
     "build": "npm run build-components && ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",

@@ -1,5 +1,5 @@
 import { APP_INITIALIZER, enableProdMode, importProvidersFrom } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { bootstrapApplication } from '@angular/platform-browser';
 
@@ -14,6 +14,7 @@ import { ApplicationInsights } from '@microsoft/applicationinsights-web';
 
 import { AuthModule,AuthClientConfig } from '@auth0/auth0-angular'
 import { environment } from './environments/environment';
+import { AuthGuard, CacheInterceptor } from 'control-flow';
 
 fetch('assets/config/config.json')
 .then((response) => response.json())
@@ -40,7 +41,9 @@ fetch('assets/config/config.json')
           return() => {}
         }
       },
+      { provide: HTTP_INTERCEPTORS, useClass: CacheInterceptor, multi:true },
       HttpClientModule,
+      AuthGuard,
       importProvidersFrom(
         AuthModule.forRoot({
           domain: _config.auth.domain,
