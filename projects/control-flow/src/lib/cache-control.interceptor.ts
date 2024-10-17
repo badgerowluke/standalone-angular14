@@ -1,11 +1,4 @@
-import { HttpHandler,
-    HttpProgressEvent,
-    HttpInterceptor,
-    HttpSentEvent,
-    HttpHeaderResponse,
-    HttpUserEvent,
-    HttpRequest,
-    HttpResponse } from '@angular/common/http';
+import { HttpHandler, HttpProgressEvent, HttpInterceptor, HttpSentEvent, HttpHeaderResponse, HttpUserEvent, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export class CacheInterceptor implements HttpInterceptor {

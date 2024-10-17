@@ -1,5 +1,5 @@
 import { APP_INITIALIZER, enableProdMode, importProvidersFrom } from '@angular/core';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { bootstrapApplication } from '@angular/platform-browser';
 
@@ -42,7 +42,7 @@ fetch('assets/config/config.json')
         }
       },
       { provide: HTTP_INTERCEPTORS, useClass: CacheInterceptor, multi:true },
-      HttpClientModule,
+
       AuthGuard,
       importProvidersFrom(
         AuthModule.forRoot({
