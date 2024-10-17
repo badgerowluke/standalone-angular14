@@ -54,7 +54,7 @@ fetch('assets/config/config.json')
           router: routerReducer
         }),
         StoreRouterConnectingModule.forRoot(),
-        StoreDevtoolsModule.instrument()
+        StoreDevtoolsModule.instrument({connectInZone: true})
       )
     ]
   })
